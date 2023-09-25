@@ -34,5 +34,12 @@ public class Tarea1 {
         int x = 1;
         int cantidad = c.contarX(a, x, 0, 0);
         System.out.println("La cantidad de elementos que coinciden con " + x + " es: " + cantidad);
+
+        // Ejercicio Extra
+        funciones b = new funciones();
+        int decimal=12;
+        System.out.println("Número decimal: " + decimal);
+        System.out.print("Equivalente binario: ");
+        b.numBinario(decimal);
     }
 }

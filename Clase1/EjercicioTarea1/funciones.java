@@ -63,5 +63,14 @@ public class funciones {
         }
         return contarX(a, x, ini + 1, contador);
     }
+
+    // Ejercicio Extra
+    public void numBinario(int i){
+        if (i > 0){
+            numBinario(i / 2);
+            System.out.print(i % 2);
+        }
+        
+    }
 }
 
