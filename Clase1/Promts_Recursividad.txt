@@ -1,0 +1,204 @@
+--------- Bing Chat ---------
+//////////////////////////////////////
+
+promt_1: "Dame ejemplos de procedimientos recursivos en cualquier ambito de la vida"
+
+output:
+
+La recursividad es un concepto que se encuentra en varios aspectos de la vida diaria. Aquí te dejo algunos ejemplos:
+
+Fractales: Los fractales son formas geométricas que se repiten infinitamente a diferentes escalas. Un ejemplo de esto es la estructura de un copo de nieve, donde cada brazo del copo es una versión más pequeña del todo.
+
+Árboles genealógicos: Un árbol genealógico es un ejemplo de una estructura recursiva. Cada persona en el árbol tiene dos padres, y cada uno de esos padres tiene dos padres, y así sucesivamente.
+
+Anidación de muñecas rusas (Matryoshka): Cada muñeca contiene una muñeca más pequeña en su interior, y esa muñeca más pequeña contiene otra aún más pequeña, y así sucesivamente.
+
+Recetas de cocina: Muchas recetas requieren la repetición de ciertos pasos hasta que se cumpla una condición. Por ejemplo, puedes tener una receta que diga “revolver cada 5 minutos hasta que la salsa espese”.
+
+Estructuras naturales: Muchas estructuras en la naturaleza, como las ramas de los árboles o los sistemas fluviales, muestran patrones recursivos.
+
+Espero que estos ejemplos te ayuden a entender mejor el concepto de recursividad.
+
+///////////////////////////////////////////////////////
+
+promt_2 sugerido por el Chat: "¿Cuál es la diferencia entre recursividad directa e indirecta?"
+
+output:
+
+La recursividad es una técnica de programación que consiste en que una función se llame a sí misma. Existen dos tipos de recursividad1:
+
+Recursividad directa: Se da cuando la función efectúa una llamada a sí misma1. Por ejemplo, un cálculo factorial donde la función se llama a sí misma para calcular el factorial de un número2.
+
+Recursividad indirecta: Se da cuando una función A llama a otra función B la cual a su vez, y de forma directa o indirecta, llama nuevamente a A1. Un ejemplo de esto podría ser una función A que llama a una función B, y esta función B llama de nuevo a la función A2.
+
+Es importante tener en cuenta que en ambos casos, es crucial tener una condición de terminación para evitar un ciclo infinito.
+
+///////////////////////////////////////////////////////
+
+promt_3 sugerido por el Chat: "¿Cuál es la ventaja de usar recursividad en programación?"
+
+output:
+
+La recursividad en programación tiene varias ventajas¹⁶³:
+
+1. **Claridad**: La recursividad puede hacer que el código sea más claro y fácil de entender¹.
+2. **Simplicidad**: Permite escribir algoritmos más elegantes y simples³.
+3. **Resolución de problemas complejos**: La recursividad puede ser útil para resolver problemas que no tienen una fácil solución iterativa⁶.
+4. **Estructuras de datos complejas**: Permite trabajar con estructuras de datos complejas como los árboles¹.
+5. **Reducción de la complejidad del código**: Ayuda a reducir la complejidad del código en general³.
+
+Es importante tener en cuenta que, aunque la recursividad tiene estas ventajas, también puede tener desventajas, como la posibilidad de agotar la pila de llamadas si no se maneja correctamente, o ser menos eficiente en términos de tiempo y espacio en comparación con las soluciones iterativas para algunos problemas⁶.
+
+Origen: Conversación con Bing, 21/9/2023
+(1) recursion - recursivos - ¿Cuáles son las ventajas y desventajas de la .... https://code-examples.net/es/q/501ead.
+(2) undefined. https://santosjestructuradedatos.wordpress.com/2020/10/29/ventajas-y-desventajas-de-la-recursividad/.
+(3) Comprendiendo la recursividad en programación: todo lo que necesitas saber. https://reparartuordenador.com/que-es-la-recursividad-en-programacion.
+(4) . https://bing.com/search?q=ventajas+de+la+recursividad+en+programaci%c3%b3n.
+(5) Ventajas y desventajas de la recursividad estructura de datos. https://www.studocu.com/es-mx/document/instituto-tecnologico-de-acapulco/estructura-de-datos/ventajas-y-desventajas-de-la-recursividad-estructura-de-datos/34185438.
+(6) Recursividad (artículo) | Algoritmos | Khan Academy. https://es.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/recursion.
+(7) undefined. https://www.netmentor.es/Entrada/Recursividad-programacion.
+(8) undefined. https://quees.com/recursividad-programacion/.
+
+/////////////////////////////////////////////////////////
+
+promt_4 sugerido por el Chat: "Explícame cómo se maneja la pila de llamadas en la recursión"
+
+output:
+
+En la recursión, la pila de llamadas juega un papel crucial. Aquí te explico cómo funciona:
+
+1. **Llamada a la función**: Cuando se llama a una función recursiva, se crea una nueva entrada o "marco" en la pila de llamadas¹². Este marco contiene información sobre la función que se está ejecutando, incluyendo los valores de sus parámetros y variables locales².
+
+2. **Anidación de llamadas**: Si la función recursiva se llama a sí misma (recursividad directa) o llama a otra función que eventualmente la llama de nuevo (recursividad indirecta), se crea un nuevo marco en la pila de llamadas para cada una de estas llamadas¹². Esto significa que la pila de llamadas puede crecer con cada llamada recursiva¹².
+
+3. **Retorno de la función**: Cuando una función termina su ejecución, ya sea porque ha alcanzado una condición base en el caso de una función recursiva o porque ha ejecutado todas sus instrucciones, su marco se elimina de la pila de llamadas¹². El control vuelve a la función que hizo la llamada original, y su ejecución se reanuda desde el punto donde se dejó².
+
+4. **Gestión de memoria**: La pila de llamadas es una estructura de datos que utiliza memoria. Por lo tanto, si las llamadas recursivas son demasiado profundas o no tienen una condición base adecuada, la pila de llamadas puede llenarse, lo que resulta en un error de desbordamiento de pila¹².
+
+Es importante tener en cuenta que algunas técnicas, como la recursión de cola, pueden optimizar el uso de la pila de llamadas para que solo se use una entrada de pila para todas las llamadas recursivas de una función¹.
+
+Origen: Conversación con Bing, 21/9/2023
+(1) . https://bing.com/search?q=c%c3%b3mo+se+maneja+la+pila+de+llamadas+en+la+recursi%c3%b3n.
+(2) Pilas, llamadas a procedimientos y recursión - 1Library.Co. https://1library.co/article/pilas-llamadas-a-procedimientos-y-recursi%C3%B3n.z1r3x6pq.
+(3) recursión - Como saber la cantidad de RAM (pila) que consume una .... https://es.stackoverflow.com/questions/225235/como-saber-la-cantidad-de-ram-pila-que-consume-una-funci%c3%b3n-recursiva-en-javasc.
+(4) Python | Límite de recurrencia de manejo – Barcelona Geeks. https://barcelonageeks.com/python-manejo-del-limite-de-recursividad/.
+(5) Tema 1.6. Recursividad usando pilas - Estructura de Datos - Clavijero. https://cursos.clavijero.edu.mx/cursos/144_ed/modulo1/contenidos/tema1.6.html.
+(6) undefined. https://developer.mozilla.org/es/docs/glossary/call_stack.
+(7) undefined. https://es.wikipedia.org/wiki/Pila_de_llamadas.
+
+/////////////////////////////////////////////////////////
+
+promt_5 sugerido por el Chat: "Explícame cómo se maneja la pila de llamadas en la recursión"
+
+output:
+
+En una función recursiva, los casos base son aquellos que para su solución no requieren utilizar la función que se está definiendo³⁵. Son esenciales para evitar que la función recursiva se ejecute infinitamente¹³.
+
+Por ejemplo, al calcular el factorial de un número, los casos base son cuando el número es cero o uno, ya que sabemos que el factorial de cero y uno es uno³. En este caso, no necesitamos llamar a la función recursiva para obtener la respuesta³.
+
+Otro ejemplo sería al calcular el n-ésimo término de la serie de Fibonacci. Los casos base son cuando n es cero o uno, ya que los primeros dos términos de la serie de Fibonacci son cero y uno respectivamente².
+
+En resumen, los casos base son condiciones en las que la función puede proporcionar una respuesta directa sin necesidad de llamarse a sí misma¹³.
+
+Origen: Conversación con Bing, 21/9/2023
+(1) Definición de funciones recursivas: - UCM. https://antares.sip.ucm.es/~fernando/pf/temas/recursion.html.
+(2) Que es caso base en recursividad? – RESPUESTASRAPIDAS. https://respuestasrapidas.com.mx/que-es-caso-base-en-recursividad/.
+(3) . https://bing.com/search?q=casos+base+en+una+funci%c3%b3n+recursiva.
+(4) Funciones recursivas en programación 【definición y ejemplos】. https://lenguajesdeprogramacion.net/diccionario/funciones-recursivas-en-programacion/.
+(5) 5. Recursión — Programación 2019-1 - UNAM. https://www.matem.unam.mx/~gil/20191/topics/recursion.html.
+(6) undefined. https://es.wikipedia.org/wiki/Recursi%C3%B3n_%28ciencias_de_computaci%C3%B3n%29.
+
+/////////////////////////////////////////////////////////
+
+promt_6 sugerido por el Chat: "¿Qué otros ejemplos hay donde se usen casos base en funciones recursivas?"
+
+output:
+
+Aquí te dejo algunos ejemplos de funciones recursivas con sus respectivos casos base¹²³⁴:
+
+1. **Cálculo del factorial**: El caso base es cuando el número es cero, ya que el factorial de cero es uno². Aquí está el código en Java:
+    ```java
+    public static int factorial(int n) {
+        if (n == 0) {
+            return 1;
+        } else {
+            return n * factorial(n - 1);
+        }
+    }
+    ```
+
+2. **Cálculo de potencias**: El caso base es cuando el exponente es cero, ya que cualquier número elevado a la potencia de cero es uno³. Aquí está el código en Java:
+    ```java
+    public static int power(int base, int exp) {
+        if (exp == 0) {
+            return 1;
+        } else {
+            return base * power(base, exp - 1);
+        }
+    }
+    ```
+
+3. **Máximo común divisor (MCD)**: El caso base es cuando el segundo número es cero, ya que el MCD de cualquier número y cero es el número⁴. Aquí está el código en Java:
+    ```java
+    public static int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        } else {
+            return gcd(b, a % b);
+        }
+    }
+    ```
+
+4. **Números de Fibonacci**: Los casos base son cuando n es cero o uno, ya que los primeros dos términos de la serie de Fibonacci son cero y uno respectivamente². Aquí está el código en Java:
+    ```java
+    public static int fibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        } else {
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+    }
+    ```
+
+Estos son solo algunos ejemplos. Hay muchos otros problemas que se pueden resolver utilizando funciones recursivas con casos base apropiados.
+
+Origen: Conversación con Bing, 21/9/2023
+(1) . https://bing.com/search?q=ejemplos+de+casos+base+en+funciones+recursivas.
+(2) Funciones recursivas en programación 【definición y ejemplos】. https://lenguajesdeprogramacion.net/diccionario/funciones-recursivas-en-programacion/.
+(3) Funciones recursiva: Recursividad - Desarrollo Web. https://desarrolloweb.com/articulos/funciones-recursivas-recursividad.html.
+(4) Algoritmos y estructuras de datos - Recursión. https://academicos.azc.uam.mx/franz/aed/docs/recursion.pdf.
+(5) Recursividad - Universidad de Granada. https://elvex.ugr.es/decsai/c/apuntes/recursividad.pdf.
+(6) undefined. https://ccia.ugr.es/~jfv/recursividad.pdf.
+
+/////////////////////////////////////////////////////////
+
+promt_7 sugerido por el Chat: "¿Qué otros ejemplos hay donde se usen funciones recursivas?"
+
+output:
+
+Aquí te dejo algunos ejemplos de funciones recursivas¹³⁴:
+
+1. **Cálculo del máximo común divisor (MCD)**: El MCD es el número más grande que divide exactamente a ambos números. Se puede usar el algoritmo de Euclides para hallar el MCD recursivamente¹.
+
+2. **Resolver laberintos**: Un laberinto es un problema en el que se tiene que encontrar la salida dado un punto de inicio y un punto de salida. Se puede usar la técnica de backtracking para explorar el laberinto recursivamente¹.
+
+3. **Cálculo del producto de dos números enteros**: El producto de dos números se puede obtener sumando el primer número tantas veces como el segundo número. Se puede usar una función recursiva que sume el primer número y se llame a sí misma con el segundo número disminuido en uno¹.
+
+4. **Pasar un número en base 10 a base 2**: El número en base 2 se puede obtener dividiendo el número en base 10 entre 2 y concatenando el resto. Se puede usar una función recursiva que divida el número entre 2 y se llame a sí misma con el cociente¹.
+
+5. **Búsqueda binaria**: La búsqueda binaria es un algoritmo eficiente para encontrar un elemento en una lista ordenada. Se basa en dividir la lista a la mitad en cada paso hasta que se encuentre el elemento o se agote la lista³.
+
+6. **Ordenamiento rápido (Quicksort)**: Quicksort es un algoritmo de ordenamiento eficiente que utiliza la técnica de dividir y conquistar. Selecciona un 'pivote' y luego mueve todos los elementos menores a un lado del pivote y todos los elementos mayores al otro lado, luego hace lo mismo con cada mitad, recursivamente⁴.
+
+Estos son solo algunos ejemplos, hay muchos otros problemas que se pueden resolver utilizando funciones recursivas.
+
+Origen: Conversación con Bing, 21/9/2023
+(1) Funciones recursivas en C# | Estrada Web Group. https://estradawebgroup.com/Post/Funciones-recursivas-en-C/20602.
+(2) Funciones recursivas en programación 【definición y ejemplos】. https://lenguajesdeprogramacion.net/diccionario/funciones-recursivas-en-programacion/.
+(3) Funciones recursivas: definición y ejemplos | Estudyando. https://estudyando.com/funciones-recursivas-definicion-y-ejemplos/.
+(4) . https://bing.com/search?q=ejemplos+de+funciones+recursivas.
+(5) Definición recursiva - Wikipedia, la enciclopedia libre. https://es.wikipedia.org/wiki/Definici%C3%B3n_recursiva.
+(6) Funciones recursivas | Microsoft Learn. https://learn.microsoft.com/es-es/cpp/c-language/recursive-functions?view=msvc-170.
+(7) undefined. https://desarrolloweb.com/articulos/funciones-recursivas-recursividad.html.
+(8) undefined. http://blog.espol.edu.ec/ccpg1001/funciones-recursivas/.
+
