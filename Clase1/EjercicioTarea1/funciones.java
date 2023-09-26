@@ -64,13 +64,26 @@ public class funciones {
         return contarX(a, x, ini + 1, contador);
     }
 
-    // Ejercicio Extra
+    // Ejercicio Extra 1
     public void numBinario(int i){
+        // Caso base: decimal = 0
         if (i > 0){
             numBinario(i / 2);
             System.out.print(i % 2);
         }
         
     }
+
+    // Ejercicio Extra 2
+    public void hanoi(int n, String origen, String auxiliar, String destino) {
+        if (n == 1) {
+            System.out.println("Mover el disco 1 desde " + origen + " a " + destino);
+        } else {
+            hanoi(n-1, origen, destino, auxiliar);
+            System.out.println("Mover el disco " + n + " desde " + origen + " a " + destino);
+            hanoi(n-1, auxiliar, origen, destino);
+        }
+    }
+           
 }
 
