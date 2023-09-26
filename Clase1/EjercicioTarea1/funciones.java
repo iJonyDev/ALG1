@@ -30,7 +30,7 @@ public class funciones {
 
     // Ejercicio 3
     public int sumArr(int[] v,int length){
-        // Casos base: unico elemento del array
+        // Casos base: se ha recorrido todo el array
         if(length==1){
             return v[length-1];
         }else{
@@ -41,7 +41,7 @@ public class funciones {
     // Ejercicio 4
     public boolean Palindroma(String palabra) {
         palabra = palabra.toLowerCase();
-        // Casos base: siempre es palindroma
+        // Caso base: siempre es palindroma
         if (palabra.length() == 0 || palabra.length() == 1) {
             return true;
         }
@@ -76,6 +76,7 @@ public class funciones {
 
     // Ejercicio Extra 2
     public void hanoi(int n, String origen, String auxiliar, String destino) {
+        // Caso base: solo hace falta mover un disco
         if (n == 1) {
             System.out.println("Mover el disco 1 desde " + origen + " a " + destino);
         } else {
@@ -83,6 +84,19 @@ public class funciones {
             System.out.println("Mover el disco " + n + " desde " + origen + " a " + destino);
             hanoi(n-1, auxiliar, origen, destino);
         }
+    }
+
+    // Ejercicio Extra 3
+    public int multiplica(int n, int m){
+        // Caso base 1
+        if(n == 0 || m == 0){
+            return 0;
+        }
+        // Caso base 2
+        if (m == 1){
+            return n;
+        }
+        return n + multiplica(n, m - 1);
     }
            
 }
