@@ -46,5 +46,10 @@ public class Tarea1 {
 
         funciones1 h = new funciones1();
         h.hanoi(3, "Torre1", "Torre2", "Torre3");
+
+        // Ejercicio Extra 3
+        funciones mul = new funciones();
+        int multiplica =mul.multiplica(4, 4);
+        System.out.println(multiplica);
     }
 }
