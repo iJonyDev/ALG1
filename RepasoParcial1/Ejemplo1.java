@@ -15,7 +15,7 @@ public class Ejemplo1 {
         int i = 0;
         while ( i < N ) {
             int j = i + 1;
-            while ( j < N) {
+            while ( j < N ) {
                 if (matrix[i][j] != matrix[j][i]) {
                     return false;
                 }
