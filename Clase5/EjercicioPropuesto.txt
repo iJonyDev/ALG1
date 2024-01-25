@@ -1,0 +1,18 @@
+5 - Ejercicios búsquedas locales
+
+Crea un programa en Java para realizar un ejemplo de búsqueda local.
+Entregue el PDF explicando el problema junto con el código en Java de la solución.
+Ejemplo de enunciado:
+
+Supongamos que tenemos a cargo la programación de las clases en la universidad.
+El objetivo es asignar clases a aulas y horarios de manera eficiente, teniendo en cuenta las restricciones y preferencias de profesores y estudiantes.
+El problema es encontrar una programación que minimice conflictos de horarios y utilice eficazmente los recursos.
+Posibles entrada:
+Lista de profesores y sus preferencias de horario.
+Lista de estudiantes y sus horarios disponibles.
+Lista de aulas disponibles y sus capacidades.
+Restricciones específicas de programación, como la duración de las clases, la cantidad de clases que un profesor puede dar en un día, etc.
+Salida:
+Un horario que asigne clases a aulas y horarios, teniendo en cuenta las preferencias de profesores y estudiantes, y minimice conflictos de horarios.
+Restricciones:
+Las restricciones específicas pueden variar según la institución (o el problema a resolver), pero en general, se deben cumplir las preferencias y disponibilidad de profesores y estudiantes. Además, se deben utilizar las aulas de manera eficiente.

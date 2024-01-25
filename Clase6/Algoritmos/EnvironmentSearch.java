@@ -4,6 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+class Location {
+    String name;
+    double score;
+
+    public Location(String name, double score) {
+        this.name = name;
+        this.score = score;
+    }
+}
+
 public class EnvironmentSearch {
     public static void main(String[] args) {
         // Definir una lista de posibles ubicaciones con sus puntuaciones
