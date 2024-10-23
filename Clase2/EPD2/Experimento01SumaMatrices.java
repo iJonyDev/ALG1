@@ -56,7 +56,7 @@ public class Experimento01SumaMatrices {
     }
     
     public static void main(String[] args) throws Exception {
-        int[] n = new int[] {10, 25, 75, 100};
+        int[] n = new int[] {500,1000,1100,800};
         
         Experimento01SumaMatrices.runExperimentsIt(n);
         

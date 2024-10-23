@@ -18,10 +18,22 @@
   * Soluciones simples.
 - **Condicion necesaria**: Asignacion dinamica de memoria.
 ### Caracteristicas basicas
-- Autoinvocacion (caso general): el proceso se llama a si mismo
-- Caso directo (caso base): el problema puede resolverse para casos de menor tamaño
-- Combinacion: los resultados de la llamada precedente son utilizados para obtener una solucion, posiblemente combinados con otros datos.
+- **Autoinvocacion** (caso general): el proceso se llama a si mismo
+- **Caso directo** (caso base): el problema puede resolverse para casos de menor tamaño
+- **Combinacion**: los resultados de la llamada precedente son utilizados para obtener una solucion, posiblemente combinados con otros datos.
 ### Ejemplo: calculo del factorial
+
+![alt text](<Screenshot 2024-07-09 at 22.35.46.png>)
+```java
+// Algoritmo iterativo
+int factorial(int n){
+  int i, r = 1; {
+  for (i = 0; i < n; i + +);
+    r = r · (n − i);
+  }
+  return r;
+}
+```
 
 ## Verificacion de procedidmientos recursivos
 ## Escritura de programas recursivos

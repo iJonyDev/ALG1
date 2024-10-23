@@ -11,7 +11,7 @@ public class Clase1 {
         System.out.println("Factorial por Algoritmo recursivo");
         System.out.println(r.factorial_recurs(3));
         System.out.println("Factorial por Algoritmo iterativo");
-        System.out.println(r.factorial_iter(7));
+        System.out.println(r.factorial_iter(3));
 
         System.out.println("Fibonacci por Algoritmo recursivo");
         System.out.println(f.a(3));
