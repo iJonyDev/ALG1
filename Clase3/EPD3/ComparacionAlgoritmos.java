@@ -7,7 +7,7 @@ public class ComparacionAlgoritmos {
     public static void main(String[] args) {
         int[] vector;
         int[] vectorCopia;
-        int[] tamanios = {100, 1000, 10000}; // Tamaños de los vectores a probar
+        int[] tamanios = {5000, 10000, 20000}; // Tamaños de los vectores a probar
 
         for (int n : tamanios) {
             vector = generarVectorAleatorio(n); // Generar un nuevo vector aleatorio de tamaño n
@@ -29,8 +29,8 @@ public class ComparacionAlgoritmos {
 
             // Imprimir los tiempos de ejecución obtenidos
             System.out.println("Tamaño del vector: " + n);
-            System.out.println("Tiempo de ejecución (Inserción): " + tiempoEjecucionInsercion + " nanosegundos");
-            System.out.println("Tiempo de ejecución (Burbuja): " + tiempoEjecucionBurbuja + " nanosegundos");
+            System.out.println("Tiempo de ejecución (Inserción): " + tiempoEjecucionInsercion/10000000 + " microsegundos");
+            System.out.println("Tiempo de ejecución (Burbuja): " + tiempoEjecucionBurbuja/1000000 + " microsegundos");
             System.out.println("----------------------------------------");
         }
     }
