@@ -24,13 +24,13 @@ public class EPD4 {
 
             // Leer todas las líneas restantes en una lista
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {    // Mientras haya líneas por leer
                 if (line.trim().isEmpty()) continue; // Ignorar líneas vacías
-                String[] parts = line.trim().split("\\s+");
+                String[] parts = line.trim().split("\\s+"); // Separar por espacios
                 if (parts.length >= 3) { // Verificar que hay al menos 3 partes
-                    double x = Double.parseDouble(parts[1]);
-                    double y = Double.parseDouble(parts[2]);
-                    cities.add(new double[]{x, y});
+                    double x = Double.parseDouble(parts[1]);    // Convertir a double
+                    double y = Double.parseDouble(parts[2]);    
+                    cities.add(new double[]{x, y}); // Agregar a la lista de ciudades
                 }
             }
 
@@ -39,65 +39,72 @@ public class EPD4 {
         }
         return cities;
     }
-
+    // Calcular la matriz de distancias
     private static double[][] calculateDistanceMatrix(List<double[]> cities) {
-        double[][] distanceMatrix = new double[cities.size()][cities.size()];
-        for (int i = 0; i < cities.size(); i++) {
-            for (int j = 0; j < cities.size(); j++) {
-                distanceMatrix[i][j] = calculateDistance(cities.get(i), cities.get(j));
+        double[][] distanceMatrix = new double[cities.size()][cities.size()];   // Inicializar la matriz de distancias
+        for (int i = 0; i < cities.size(); i++) {  
+            for (int j = 0; j < cities.size(); j++) {  
+                distanceMatrix[i][j] = calculateDistance(cities.get(i), cities.get(j)); // Calcular la distancia entre las ciudades i y j
             }
         }
-        return distanceMatrix;
+        return distanceMatrix;  // Retornar la matriz de distancias
     }
 
+    // Calcular la distancia entre dos ciudades
     private static double calculateDistance(double[] city1, double[] city2) {
         double dx = city1[0] - city2[0];
         double dy = city1[1] - city2[1];
-        return Math.sqrt(dx * dx + dy * dy);
+        return Math.sqrt(dx * dx + dy * dy);    // Distancia euclidiana
     }
 
-    public static int[] randomSearch(double[][] distances, int n) {
-        int[] bestSolution = new int[n];
-        double bestCost = Double.MAX_VALUE;
+    public static int[] randomSearch(double[][] distances) {
+        int[] bestSolution = new int[distances.length]; // Inicializar un vector que contendrá la mejor solución
+        double bestCost = Double.MAX_VALUE; // Inicializar con un valor muy grande para asegurar que cualquier solución sea mejor
         Random random = new Random();
 
-        for (int i = 0; i < n; i++) {
-            int[] currentSolution = generateRandomSolution(n, random);
-            double currentCost = calculateCost(currentSolution, distances);
+        for (int i = 0; i < distances.length; i++) { // Número de iteraciones para (soluciones aleatorias)
+            int[] currentSolution = generateRandomSolution(distances.length, random);  // Generar una solución aleatoria
+            double currentCost = calculateCost(currentSolution, distances); // Calcular el costo de la solución
 
-            if (currentCost < bestCost) {
-                bestCost = currentCost;
-                bestSolution = currentSolution.clone();
+            if (currentCost < bestCost) {   // Si la solución actual es mejor que la mejor solución encontrada
+                bestCost = currentCost;    // Actualizar el mejor costo
+                bestSolution = currentSolution.clone(); // Actualizar la mejor solución
             }
         }
 
-        return bestSolution;
+        return bestSolution;    // Retornar la mejor solución encontrada
     }
 
+    // Generar una solución aleatoria
     public static int[] generateRandomSolution(int n, Random random) {
-        int[] solution = new int[n];
-        for (int i = 0; i < n; i++) {
+        int[] solution = new int[n];    // Inicializar un arreglo de tamaño n (numero de ciudades)
+        for (int i = 0; i < n; i++) {   // Llenar el arreglo con los índices de las ciudades
             solution[i] = i;
         }
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {   // Mezclar las ciudades
             int j = random.nextInt(n);
             int temp = solution[i];
             solution[i] = solution[j];
             solution[j] = temp;
         }
-        return solution;
+        return solution;    // Retornar la solución generada
     }
 
+    // Calcular el costo de una solución
+    /* int[] solution : array que representa una posible solución al problema TSP
+    Cada elemento del arreglo es un índice que representa una ciudad, y el orden
+    de los elementos representa el orden en que se visitan las ciudades.
+    */  
     public static double calculateCost(int[] solution, double[][] distances) {
         double cost = 0;
-        for (int i = 0; i < solution.length - 1; i++) {
-            cost += distances[solution[i]][solution[i + 1]];
+        for (int i = 0; i < solution.length - 1; i++) {     // Calcular el costo de la solución
+            cost += distances[solution[i]][solution[i + 1]];    // Sumar la distancia entre la ciudad i y la ciudad i+1
         }
-        cost += distances[solution[solution.length - 1]][solution[0]]; // Volver al inicio
+        cost += distances[solution[solution.length - 1]][solution[0]];  // Sumar la distancia entre la última ciudad y la primera
         return cost;
     }
 
-    private static void printDistanceMatrix(double[][] distanceMatrix) {
+    private static void printDistanceMatrix(double[][] distanceMatrix) { // Imprimir la matriz de distancias
         for (int i = 0; i < distanceMatrix.length; i++) {
             for (int j = 0; j < distanceMatrix[i].length; j++) {
                 System.out.printf("%.3f ", distanceMatrix[i][j]);
@@ -106,7 +113,7 @@ public class EPD4 {
         }
     }
 
-    private static void printCities(List<double[]> cities) {
+    private static void printCities(List<double[]> cities) {    // Imprimir las ciudades
         System.out.printf("%-5s %-10s %-10s\n", "City", "X", "Y");
         int i = 1;
         for (double[] city : cities) {
@@ -115,35 +122,29 @@ public class EPD4 {
         }
     }
 
-    private static double runBA1() {
-        String filePath = "/workspaces/ALG1/EPD4/EPD4/src/data/berlin52.tsp";
-        List<double[]> cities = instanceLoader(filePath);
-        double[][] distanceMatrix = calculateDistanceMatrix(cities);
+    private static Object[] runBA1() { // Método que ejecuta el algoritmo BA1
+        String filePath = "/workspaces/ALG1/EPD4/EPD4/src/data/berlin52.tsp"; // Ruta del archivo de la instancia
+        List<double[]> cities = instanceLoader(filePath); // Cargar las ciudades
+        double[][] distanceMatrix = calculateDistanceMatrix(cities);    // Calcular la matriz de distancias
 
-        int n = distanceMatrix.length; // Número de ciudades
-        double etime = 0;
-        long start = System.nanoTime();
-        int[] bestSolution = randomSearch(distanceMatrix, n);
-        long stop = System.nanoTime();
-        etime = ((double) (stop - start))/1_000_000_000;
-        return etime;
+        double etime = 0;   // Inicializar el tiempo de ejecución
+        long start = System.nanoTime(); // Iniciar el cronómetro
+        int[] bestSolution = randomSearch(distanceMatrix);  // Ejecutar el algoritmo BA1
+        long stop = System.nanoTime();  // Detener el cronómetro
+        etime = ((double) (stop - start))/1_000_000_000;    // Calcular el tiempo de ejecución en segundos
+        return new Object[]{etime, bestSolution};   // Retornar el tiempo de ejecución y la mejor solución encontrada
     }
 
     
 
     public static void main(String[] args) {
-        double etime = runBA1();
-        System.out.println("Time: " + etime + " seconds");
-        //String filePath = "/workspaces/ALG1/EPD4/EPD4/src/data/berlin52.tsp";
-        //List<double[]> cities = instanceLoader(filePath);
-        //double[][] distanceMatrix = calculateDistanceMatrix(cities);
-
-       // int n = distanceMatrix.length; // Número de ciudades
-       // int[] bestSolution = randomSearch(distanceMatrix, n);
-        
-        //System.out.println("Mejor solución encontrada:");
-        //for (int city : bestSolution) {
-        //    System.out.print(city + " ");
-        //}
+        Object[] result = runBA1();
+        double etime = (double) result[0];
+        int[] bestSolution = (int[]) result[1];
+        System.out.println("Tiempo de ejecución: " + etime + " segundos");
+        System.out.println("Mejor solución encontrada:");
+        for (int city : bestSolution) {
+            System.out.print(city + " ");
+        }
     }
 }
