@@ -81,7 +81,7 @@ public class EPD4 {
         double bestCost = Double.MAX_VALUE; // Inicializar con un valor muy grande para asegurar que cualquier solución sea mejor
         Random random = new Random();
 
-        for (int i = 0; i < n; i++) { // Número soluciones aleatorias fidadas por el usuario
+        for (int i = 0; i < n; i++) { // Número soluciones aleatorias fijadas por el usuario
             int[] currentSolution = generateRandomSolution(distances.length, random);  // Generar una solución aleatoria
             solutions.add(currentSolution); // Agregar la solución a la lista
         }
@@ -205,7 +205,7 @@ public class EPD4 {
     
 
     public static void main(String[] args) {
-        String filePath = "/workspaces/ALG1/EPD4/EPD4/src/data/vm1748.tsp"; // Ruta del archivo de la instancia
+        String filePath = "src/data/vm1748.tsp"; // Ruta del archivo de la instancia
         int[] n = {100, 500, 1000, 5000};
         List<Object[]> resultsList1 = runBA1(n, filePath); // Ejecutar el algoritmo BA1
         System.out.println("-----Algoritmo BA1-----");
