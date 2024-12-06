@@ -102,47 +102,128 @@ public class EPD9 {
     // Divide la lista de ciudades en dos sublistas.
     // Resuelve el TSP para cada sublista recursivamente.
     // Combina las soluciones de las sublistas.
-    private static List<Integer> divideAndConquerTSP(double[][] distanceMatrix) {
+    public static List<Integer> divideAndConquerTSP(double[][] distanceMatrix) {
         int n = distanceMatrix.length;
-        List<Integer> tour = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            tour.add(i);
-        }
-        return divideAndConquer(distanceMatrix, tour);
-    }
-
-    private static List<Integer> divideAndConquer(double[][] distanceMatrix, List<Integer> tour) {
-        if (tour.size() <= 3) {
-            return tour;
+        if (n <= 3) {
+            // Si el número de ciudades es pequeño, resolver directamente usando el algoritmo voraz
+            return greedyTSP(distanceMatrix);
         }
 
-        int mid = tour.size() / 2;
-        List<Integer> leftTour = divideAndConquer(distanceMatrix, tour.subList(0, mid));
-        List<Integer> rightTour = divideAndConquer(distanceMatrix, tour.subList(mid, tour.size()));
+        // Dividir el conjunto de ciudades en dos subgrupos
+        int mid = n / 2;
+        double[][] subMatrix1 = new double[mid][mid];
+        double[][] subMatrix2 = new double[n - mid][n - mid];
 
-        return mergeTours(distanceMatrix, leftTour, rightTour);
+        for (int i = 0; i < mid; i++) {
+            for (int j = 0; j < mid; j++) {
+                subMatrix1[i][j] = distanceMatrix[i][j];
+            }
+        }
+
+        for (int i = mid; i < n; i++) {
+            for (int j = mid; j < n; j++) {
+                subMatrix2[i - mid][j - mid] = distanceMatrix[i][j];
+            }
+        }
+
+        // Resolver el TSP para cada subgrupo
+        List<Integer> tour1 = divideAndConquerTSP(subMatrix1);
+        List<Integer> tour2 = divideAndConquerTSP(subMatrix2);
+
+        // Ajustar los índices de tour2
+        for (int i = 0; i < tour2.size(); i++) {
+            tour2.set(i, tour2.get(i) + mid);
+        }
+
+        // Combinar las soluciones de los subgrupos
+        return combineTours(tour1, tour2, distanceMatrix);
     }
 
-    private static List<Integer> mergeTours(double[][] distanceMatrix, List<Integer> leftTour, List<Integer> rightTour) {
-        List<Integer> mergedTour = new ArrayList<>(leftTour);
-        mergedTour.addAll(rightTour);
+    public static List<Integer> combineTours(List<Integer> tour1, List<Integer> tour2, double[][] distanceMatrix) {
+        List<Integer> combinedTour = new ArrayList<>(tour1);
+        combinedTour.addAll(tour2);
+
+        // Encontrar el mejor punto de conexión entre los dos tours
+        double bestCost = Double.MAX_VALUE;
+        int bestI = -1;
+        int bestJ = -1;
+
+        for (int i = 0; i < tour1.size(); i++) {
+            for (int j = 0; j < tour2.size(); j++) {
+                double cost = distanceMatrix[tour1.get(i)][tour2.get(j)] +
+                              distanceMatrix[tour2.get(j)][tour1.get((i + 1) % tour1.size())] -
+                              distanceMatrix[tour1.get(i)][tour1.get((i + 1) % tour1.size())];
+                if (cost < bestCost) {
+                    bestCost = cost;
+                    bestI = i;
+                    bestJ = j;
+                }
+            }
+        }
+
+        // Conectar los dos tours en el mejor punto de conexión
+        List<Integer> mergedTour = new ArrayList<>();
+        for (int i = 0; i <= bestI; i++) {
+            mergedTour.add(tour1.get(i));
+        }
+        for (int j = bestJ; j < tour2.size(); j++) {
+            mergedTour.add(tour2.get(j));
+        }
+        for (int j = 0; j <= bestJ; j++) {
+            mergedTour.add(tour2.get(j));
+        }
+        for (int i = bestI + 1; i < tour1.size(); i++) {
+            mergedTour.add(tour1.get(i));
+        }
+
         return mergedTour;
     }
 
-    public static void main(String[] args) {
-        String filePath = "src/data/vm1748.tsp";
+    private static List<Object[]> runGreedyTSP(String filePath) {
         List<double[]> cities = instanceLoader(filePath);
-
-        // Calcular la matriz de distancias
         double[][] distanceMatrix = calculateDistanceMatrix(cities);
+        List<Object[]> results = new ArrayList<>();
+        
+            long start = System.nanoTime();
+            List<Integer> greedyTour = greedyTSP(distanceMatrix);
+            long stop = System.nanoTime();
+            double etime = ((double) (stop - start)) / 1_000_000_000;
+            results.add(new Object[]{etime, greedyTour});
+        return results;
+    }
 
+    private static List<Object[]> runDivideAndConquerTSP(String filePath) {
+        List<double[]> cities = instanceLoader(filePath);
+        double[][] distanceMatrix = calculateDistanceMatrix(cities);
+        List<Object[]> results = new ArrayList<>();
+        
+            long start = System.nanoTime();
+            List<Integer> divideAndConquerTour = divideAndConquerTSP(distanceMatrix);
+            long stop = System.nanoTime();
+            double etime = ((double) (stop - start)) / 1_000_000_000;
+            results.add(new Object[]{etime, divideAndConquerTour});
+        return results;
+    }
 
-        // Resolver TSP usando Algoritmo Voraz
-        List<Integer> greedyTour = greedyTSP(distanceMatrix);
-        System.out.println("Greedy TSP Tour: " + greedyTour);
+    private static void printResults(List<Object[]> results) {
+        for (int i = 0; i < results.size(); i++) {
+            double etime = (double) results.get(i)[0];
+            List<Integer> tour = (List<Integer>) results.get(i)[1];
+            System.out.println("Tiempo de ejecución: " + etime + " segundos");
+            System.out.println("Mejor solución encontrada: " + tour);
+        }
+    }
+    public static void main(String[] args) {
+        String filePath = "/workspaces/ALG1/EPD9evaluable/EPD9/src/data/berlin52.tsp";
 
-        // Resolver TSP usando Divide y Vencerás
-        List<Integer> divideAndConquerTour = divideAndConquerTSP(distanceMatrix);
-        System.out.println("Divide and Conquer TSP Tour: " + divideAndConquerTour);
+        // Ejecutar y medir el tiempo del algoritmo voraz
+        List<Object[]> resultsList1 = runGreedyTSP(filePath);
+        System.out.println("-----Algoritmo Voraz-----");
+        printResults(resultsList1);
+
+        // Ejecutar y medir el tiempo del algoritmo de divide y vencerás
+        List<Object[]> resultsList2 = runDivideAndConquerTSP(filePath);
+        System.out.println("-----Algoritmo Divide y Vencerás-----");
+        printResults(resultsList2);
     }
 }
