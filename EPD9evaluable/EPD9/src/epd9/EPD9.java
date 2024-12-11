@@ -1,6 +1,7 @@
 package epd9;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,12 +25,13 @@ public class EPD9 {
             // Leer todas las líneas restantes en una lista
             String line;
             while ((line = br.readLine()) != null) {
-                if (line.trim().isEmpty()) continue; // Ignorar líneas vacías
+                if (line.trim().isEmpty())
+                    continue; // Ignorar líneas vacías
                 String[] parts = line.trim().split("\\s+");
                 if (parts.length >= 3) { // Verificar que hay al menos 3 partes
                     double x = Double.parseDouble(parts[1]);
                     double y = Double.parseDouble(parts[2]);
-                    cities.add(new double[]{x, y});
+                    cities.add(new double[] { x, y });
                 }
             }
 
@@ -65,8 +67,8 @@ public class EPD9 {
     }
 
     // Algoritmo Voraz para TSP
-    //Empieza en una ciudad y selecciona la ciudad más cercana no visitada.
-    //Repite hasta que todas las ciudades hayan sido visitadas.
+    // Empieza en una ciudad y selecciona la ciudad más cercana no visitada.
+    // Repite hasta que todas las ciudades hayan sido visitadas.
     private static List<Integer> VorazTSP(double[][] distanceMatrix) {
         int n = distanceMatrix.length;
         boolean[] visited = new boolean[n];
@@ -98,7 +100,8 @@ public class EPD9 {
     public static List<Integer> DivideVenceraTSP(double[][] distanceMatrix) {
         int n = distanceMatrix.length;
         if (n <= 3) {
-            // Si el número de ciudades es pequeño, resolver directamente usando el algoritmo voraz
+            // Si el número de ciudades es pequeño, resolver directamente usando el
+            // algoritmo voraz
             return VorazTSP(distanceMatrix);
         }
 
@@ -143,9 +146,10 @@ public class EPD9 {
 
         for (int i = 0; i < tour1.size(); i++) { // Iterar sobre las ciudades de tour1
             for (int j = 0; j < tour2.size(); j++) { // Iterar sobre las ciudades de tour2
-                double cost = distanceMatrix[tour1.get(i)][tour2.get(j)] + 
-                              distanceMatrix[tour2.get(j)][tour1.get((i + 1) % tour1.size())] -
-                              distanceMatrix[tour1.get(i)][tour1.get((i + 1) % tour1.size())]; // Calcular el costo de conexión
+                double cost = distanceMatrix[tour1.get(i)][tour2.get(j)] +
+                        distanceMatrix[tour2.get(j)][tour1.get((i + 1) % tour1.size())] -
+                        distanceMatrix[tour1.get(i)][tour1.get((i + 1) % tour1.size())]; // Calcular el costo de
+                                                                                         // conexión
                 if (cost < bestCost) { // Actualizar el mejor punto de conexión
                     bestCost = cost;
                     bestI = i;
@@ -172,29 +176,27 @@ public class EPD9 {
         return mergedTour;
     }
 
-    private static List<Object[]> runVorazTSP(String filePath) {
-        List<double[]> cities = instanceLoader(filePath);
+    private static List<Object[]> runVorazTSP(List<double[]> cities) {
         double[][] distanceMatrix = calculateDistanceMatrix(cities);
         List<Object[]> results = new ArrayList<>();
-        
-            long start = System.nanoTime();
-            List<Integer> greedyTour = VorazTSP(distanceMatrix);
-            long stop = System.nanoTime();
-            double etime = ((double) (stop - start)) / 1_000_000_000;
-            results.add(new Object[]{etime, greedyTour});
+
+        long start = System.nanoTime();
+        List<Integer> greedyTour = VorazTSP(distanceMatrix);
+        long stop = System.nanoTime();
+        double etime = ((double) (stop - start)) / 1_000_000_000;
+        results.add(new Object[] { etime, greedyTour });
         return results;
     }
 
-    private static List<Object[]> runDivideVenceraTSP(String filePath) {
-        List<double[]> cities = instanceLoader(filePath);
+    private static List<Object[]> runDivideVenceraTSP(List<double[]> cities) {
         double[][] distanceMatrix = calculateDistanceMatrix(cities);
         List<Object[]> results = new ArrayList<>();
-        
-            long start = System.nanoTime();
-            List<Integer> divideAndConquerTour = DivideVenceraTSP(distanceMatrix);
-            long stop = System.nanoTime();
-            double etime = ((double) (stop - start)) / 1_000_000_000;
-            results.add(new Object[]{etime, divideAndConquerTour});
+
+        long start = System.nanoTime();
+        List<Integer> divideAndConquerTour = DivideVenceraTSP(distanceMatrix);
+        long stop = System.nanoTime();
+        double etime = ((double) (stop - start)) / 1_000_000_000;
+        results.add(new Object[] { etime, divideAndConquerTour });
         return results;
     }
 
@@ -206,17 +208,29 @@ public class EPD9 {
             System.out.println("Mejor solución encontrada: " + tour);
         }
     }
+
     public static void main(String[] args) {
-        String filePath = "/workspaces/ALG1/EPD9evaluable/EPD9/src/data/vm1748.tsp";
 
-        // Ejecutar y medir el tiempo del algoritmo voraz
-        List<Object[]> resultsList1 = runVorazTSP(filePath);
-        System.out.println("-----Algoritmo Voraz-----");
-        printResults(resultsList1);
+        File dir = new File("EPD9evaluable/EPD9/src/data");
+        File[] files = dir.listFiles((d, name) -> name.endsWith(".tsp"));
+        if (files != null) {
+            for (File file : files) {
+                System.out.println(" ");
+                System.out.println("Experimento para: " + file.getName());
+                List<double[]> cities = instanceLoader(file.getPath());
+                // Ejecutar y medir el tiempo del algoritmo voraz
+                List<Object[]> resultsList1 = runVorazTSP(cities);
+                System.out.println("-----Algoritmo Voraz-----");
+                printResults(resultsList1);
 
-        // Ejecutar y medir el tiempo del algoritmo de divide y vencerás
-        List<Object[]> resultsList2 = runDivideVenceraTSP(filePath);
-        System.out.println("-----Algoritmo Divide y Vencerás-----");
-        printResults(resultsList2);
+                // Ejecutar y medir el tiempo del algoritmo de divide y vencerás
+                List<Object[]> resultsList2 = runDivideVenceraTSP(cities);
+                System.out.println("-----Algoritmo Divide y Vencerás-----");
+                printResults(resultsList2);
+            }
+        } else {
+            System.out.println("No .tsp files found in the directory.");
+        }
     }
+
 }
