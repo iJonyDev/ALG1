@@ -211,7 +211,7 @@ public class EPD9 {
 
     public static void main(String[] args) {
 
-        File dir = new File("EPD9evaluable/EPD9/src/data");
+        File dir = new File("src/data");
         File[] files = dir.listFiles((d, name) -> name.endsWith(".tsp"));
         if (files != null) {
             for (File file : files) {
